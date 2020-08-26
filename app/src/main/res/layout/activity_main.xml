@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:conatjext=".MainActivity">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/avatar"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:layout_width="@dimen/menu_icon_size"
+        android:layout_height="@dimen/menu_icon_size"
+        android:layout_marginLeft="@dimen/margin_large"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:contentDescription="Avatar"
+        android:src="@drawable/avatar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/spacing_normal"
+        android:fontFamily="@font/oxygen_sans"
+        android:text="XxPoggersxX"
+        app:layout_constraintBottom_toBottomOf="@id/avatar"
+        app:layout_constraintLeft_toRightOf="@id/avatar"
+        app:layout_constraintTop_toTopOf="@id/avatar" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/settings"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:layout_width="@dimen/menu_icon_size"
+        android:layout_height="@dimen/menu_icon_size"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:layout_marginRight="@dimen/spacing_normal"
+        android:contentDescription="Settings"
+        android:src="@drawable/settings"
+        app:layout_constraintRight_toLeftOf="@id/search"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:id="@+id/search"
+        android:layout_width="@dimen/menu_icon_size"
+        android:layout_height="@dimen/menu_icon_size"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:layout_marginRight="@dimen/spacing_normal"
+        android:contentDescription="Search"
+        android:src="@drawable/search"
+        app:layout_constraintRight_toLeftOf="@id/achievement"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:id="@+id/achievement"
+        android:layout_width="@dimen/menu_icon_size"
+        android:layout_height="@dimen/menu_icon_size"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:layout_marginRight="@dimen/margin_normal"
+        android:contentDescription="Char"
+        android:src="@drawable/achievements"
+        app:layout_constraintRight_toLeftOf="@id/clock"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/clock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/margin_large"
+        android:fontFamily="@font/oxygen_sans"
+        android:textSize="20sp"
+        android:text="7:23"
+        app:layout_constraintBottom_toBottomOf="@id/achievement"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/achievement" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/app_pager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:overScrollMode="never"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:listitem="@layout/list_item_app_icon"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:paddingTop="@dimen/app_pager_offset_from_top"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

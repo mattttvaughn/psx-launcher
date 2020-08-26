@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/app_icon_border_width"
+    android:layout_height="wrap_content"
+    android:clipChildren="false"
+    android:clipToPadding="false">
+
+    <FrameLayout
+        android:id="@+id/app_icon_image_wrapper"
+        android:layout_width="@dimen/app_icon_border_width"
+        android:layout_height="@dimen/app_icon_border_height"
+        android:clipToPadding="false"
+        android:clipChildren="false"
+        android:outlineProvider="background"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Apply the cardBackgroundColor because the white default card color peeks out behind the
+             ImageView and is very noticeable -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/app_icon_radius_cutter"
+            app:cardElevation="16dp"
+            app:cardPreventCornerOverlap="true"
+            android:layout_width="@dimen/app_icon_image_width"
+            android:clipToPadding="false"
+            android:layout_height="@dimen/app_icon_image_height"
+            app:cardBackgroundColor="@color/borderGradientStart"
+            android:layout_gravity="center"
+            app:cardCornerRadius="@dimen/app_icon_radius">
+
+            <ImageView
+                android:id="@+id/app_icon_image"
+                android:layout_width="@dimen/app_icon_image_width"
+                android:layout_height="@dimen/app_icon_image_height"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop"
+                tools:src="@drawable/deadcells" />
+
+        </androidx.cardview.widget.CardView>
+
+        <View
+            android:id="@+id/border"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="@drawable/border" />
+
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/oxygen_sans"
+        android:textColor="@color/Light.TextColor"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/app_icon_image_wrapper"
+        tools:text="Dead Cells" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
