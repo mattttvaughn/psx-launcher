@@ -3,7 +3,9 @@
 A launcher with a UI like the PlayStation UI. This was just a quick 1-2 day
 thing I made so it will probably not run right unless you have a 21:9 phone.
 
-![Demo](demo/demo.webm)
+![Screenshot](demo/demo.png)
+
+![Demo video](demo/demo.webm)
 
 I don't plan to continue working on this, but feel free to fork it and make
 your own versions of it.
