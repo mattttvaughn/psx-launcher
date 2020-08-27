@@ -62,7 +62,7 @@ class PSAppLayoutManager(context: Context) : LinearLayoutManager(context, HORIZO
             val childWidth = getDecoratedRight(child) - getDecoratedLeft(child)
             val focusWidth = childWidth / 3.0f
             val diff = max(abs(childCenter - focusLocation), focusWidth)
-            val scaleFactor = maxScale - ((1 - maxScale) * diff * diff / (focusWidth * focusWidth))
+            val scaleFactor = maxScale - ((maxScale - 1) * diff * diff / (focusWidth * focusWidth))
             val scale = max(scaleFactor, minScale)
             child.findViewById<View>(R.id.app_icon_image_wrapper).scaleX = scale
             child.findViewById<View>(R.id.app_icon_image_wrapper).scaleY = scale
