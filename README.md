@@ -7,6 +7,8 @@ thing I made so it will probably not run right unless you have a 21:9 phone.
 
 ![Demo video](demo/demo.webm)
 
+[Get the cool live wallpaper here](https://www.desktophut.com/playstation-vita-background-live-wallpaper/)
+
 I don't plan to continue working on this, but feel free to fork it and make
 your own versions of it.
 
