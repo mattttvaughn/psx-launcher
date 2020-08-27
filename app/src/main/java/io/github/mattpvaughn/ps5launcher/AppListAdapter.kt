@@ -14,10 +14,13 @@ class AppListAdapter(private val appClick: AppClick) :
     ListAdapter<AppModel, AppListAdapter.AppViewHolder>(AppDiffUtilCallback()) {
 
     companion object {
-        // This is just a stopgap implementation for the MVP.
-        //
-        // TODO: In the future, use an icon pack implementation
-         val PACKAGE_NAMES_TO_DRAWABLES = mapOf(
+        /**
+         * This is just a stopgap implementation for the MVP. This matches app package names to
+         * custom icons provided by the app
+         *
+         * TODO: In the future, use an icon pack implementation
+         */
+        val PACKAGE_NAMES_TO_DRAWABLES = mapOf(
             "spotify" to R.drawable.spotify,
             "authenticator" to R.drawable.authenticator,
             "gearhead" to R.drawable.auto,

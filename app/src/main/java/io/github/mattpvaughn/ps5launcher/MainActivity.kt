@@ -4,8 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.os.Handler
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -29,7 +27,7 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         // The apps most recently opened. Quick thing in lieu of a real DB
-        const val KEY_MOST_RECENT_APPS_OPEN = "KEY_MOST_RECENT_APPS_OPENED"
+        const val KEY_RECENT_APPS = "KEY_MOST_RECENT_APPS_OPENED"
         const val MAX_RECENT_APP_COUNT = 10
         const val SEPARATOR = "*"
         const val APP_NAME = "PS5 Launcher"
@@ -38,10 +36,7 @@ class MainActivity : AppCompatActivity() {
     private val adapter by lazy {
         AppListAdapter(object : AppClick {
             override fun click(app: AppModel) {
-                if (app.launchIntent != null) {
-                    updateRecentAppsList(app.launchIntent)
-                    openApp(app)
-                }
+                openApp(app)
             }
         })
     }
@@ -70,8 +65,10 @@ class MainActivity : AppCompatActivity() {
         binding.appPager.adapter = adapter
         binding.appPager.layoutManager = PSAppLayoutManager(this)
 
+
         val snapHelper = object : LinearSnapHelper() {
-            // limit scroll distance
+            // limit scroll distance, this causes scrolling to look more controller-like and less
+            // app-like. Kind of annoying, but maybe some kind of "quick scroll" could be added
             override fun calculateScrollDistance(velocityX: Int, velocityY: Int): IntArray {
                 return super.calculateScrollDistance(velocityX / 4, velocityY / 4)
             }
@@ -83,9 +80,9 @@ class MainActivity : AppCompatActivity() {
             adapter.submitList(it)
         })
 
-//        Log.i("PA", "Adapter item count: ${adapter.itemCount}")
         setContentView(binding.root)
 
+        // Update the clock every 5 seconds
         val cal = Calendar.getInstance()
         val dateFormat = SimpleDateFormat("K:mm", Locale.US)
         binding.clock.text = dateFormat.format(cal.time)
@@ -97,6 +94,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Adds a new app, uniquely identified by it's launch [Intent] to the start of the list of apps
+     * most recently opened, accessible via [getSharedPreferences(APP_NAME, MODE_PRIVATE)] at
+     * [KEY_RECENT_APPS]
+     */
     private fun updateRecentAppsList(launchIntent: Intent) {
         lifecycleScope.launch {
             val updatedApps = withContext(Dispatchers.IO) {
@@ -113,19 +115,26 @@ class MainActivity : AppCompatActivity() {
                 updated.add(0, component)
                 return@withContext updated
             }
-            prefs.edit().putString(KEY_MOST_RECENT_APPS_OPEN, updatedApps.joinToString(SEPARATOR))
+            prefs.edit().putString(KEY_RECENT_APPS, updatedApps.joinToString(SEPARATOR))
                 .apply()
         }
     }
 
+    /**
+     * Retrieve the list of launch [Intent]s for the most recently opened apps, sorted by recency
+     */
     private suspend fun fetchRecentApps(): List<String> {
         return withContext(Dispatchers.IO) {
-            val recentApps = prefs.getString(KEY_MOST_RECENT_APPS_OPEN, "")
+            val recentApps = prefs.getString(KEY_RECENT_APPS, "")
             return@withContext recentApps?.split(SEPARATOR) ?: emptyList()
         }
     }
 
+    /** Opens an app, updates the recent apps list */
     private fun openApp(app: AppModel) {
-        startActivity(app.launchIntent)
+        if (app.launchIntent != null) {
+            updateRecentAppsList(app.launchIntent)
+            startActivity(app.launchIntent)
+        }
     }
 }

@@ -4,16 +4,20 @@ import android.content.Context
 import android.content.Intent
 import android.content.Intent.CATEGORY_LAUNCHER
 import android.content.pm.ResolveInfo
-import android.util.Log
 import androidx.lifecycle.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class MainViewModel(
-    private val applicationContext: Context
-) : ViewModel() {
+/**
+ * The [ViewModel] for the main launcher screen.
+ *
+ * TODO: refactor out [applicationContext] for testing. Provide the resources via calls to/from
+ *       the MainActivity instead
+ */
+class MainViewModel(private val applicationContext: Context) : ViewModel() {
 
+    // The most recently opened apps
     private var recentApps: List<String>? = null
 
     @Suppress("UNCHECKED_CAST")
@@ -34,11 +38,18 @@ class MainViewModel(
     val appIcons: LiveData<List<AppModel>>
         get() = _appIcons
 
-    fun updateRecent(newRecents: List<String>) {
-        recentApps = newRecents
+    fun updateRecent(updated: List<String>) {
+        recentApps = updated
         loadPackages()
     }
 
+    /**
+     * Load all installed apps on the device. Put apps matching [recentApps] at the start of the
+     * list, retaining the same order as [recentApps]
+     *
+     * TODO: some perf could probably be gained by using the Java Stream API, or using mutable lists,
+     *       there's a lot of lists being recreated
+     */
     private fun loadPackages() {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
@@ -75,7 +86,12 @@ class MainViewModel(
         }
     }
 
-    // Pad the apps list with empty apps so the offset and the start/end of scrolling is correct
+    /**
+     * Pad the apps list with empty apps at the start and end because we want the first app
+     * to start at the focused position, and so the last app can be brought to the focus position.
+     *
+     * TODO: this will vary depending on device size. Maybe move this behavior to the LayoutManager
+     */
     private fun List<AppModel>.padList(): List<AppModel> {
         val ml = toMutableList()
         ml.add(0, NO_APP)

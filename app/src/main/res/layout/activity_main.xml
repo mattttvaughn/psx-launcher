@@ -13,7 +13,7 @@
         android:layout_height="@dimen/menu_icon_size"
         android:layout_marginLeft="@dimen/margin_large"
         android:layout_marginTop="@dimen/margin_normal"
-        android:contentDescription="Avatar"
+        android:contentDescription="@string/avatar"
         android:src="@drawable/avatar"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/spacing_normal"
         android:fontFamily="@font/oxygen_sans"
-        android:text="XxPoggersxX"
+        android:text="@string/username"
         app:layout_constraintBottom_toBottomOf="@id/avatar"
         app:layout_constraintLeft_toRightOf="@id/avatar"
         app:layout_constraintTop_toTopOf="@id/avatar" />
@@ -35,7 +35,7 @@
         android:layout_height="@dimen/menu_icon_size"
         android:layout_marginTop="@dimen/margin_normal"
         android:layout_marginRight="@dimen/spacing_normal"
-        android:contentDescription="Settings"
+        android:contentDescription="@string/settings"
         android:src="@drawable/settings"
         app:layout_constraintRight_toLeftOf="@id/search"
         app:layout_constraintTop_toTopOf="parent" />
@@ -47,7 +47,7 @@
         android:layout_height="@dimen/menu_icon_size"
         android:layout_marginTop="@dimen/margin_normal"
         android:layout_marginRight="@dimen/spacing_normal"
-        android:contentDescription="Search"
+        android:contentDescription="@string/search"
         android:src="@drawable/search"
         app:layout_constraintRight_toLeftOf="@id/achievement"
         app:layout_constraintTop_toTopOf="parent" />
@@ -59,7 +59,7 @@
         android:layout_height="@dimen/menu_icon_size"
         android:layout_marginTop="@dimen/margin_normal"
         android:layout_marginRight="@dimen/margin_normal"
-        android:contentDescription="Char"
+        android:contentDescription="@string/achievements"
         android:src="@drawable/achievements"
         app:layout_constraintRight_toLeftOf="@id/clock"
         app:layout_constraintTop_toTopOf="parent" />
@@ -72,7 +72,7 @@
         android:layout_marginRight="@dimen/margin_large"
         android:fontFamily="@font/oxygen_sans"
         android:textSize="20sp"
-        android:text="7:23"
+        tools:text="7:23"
         app:layout_constraintBottom_toBottomOf="@id/achievement"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@id/achievement" />
